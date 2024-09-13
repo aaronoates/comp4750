@@ -26,7 +26,7 @@ def diff_ngrams(freq1, freq2):
     return diff_sum
 def similarity_score(master_freq, comparison_freq):
     diff_sum = diff_ngrams(master_freq, comparison_freq)
-    similarity = 1.0 - (diff_ngrams/2.0)
+    similarity = 1.0 - (diff_sum/2.0)
     return similarity
 
 def main():
@@ -37,5 +37,21 @@ def main():
     master_file = sys.argv[1] #the master file will be the second command line argument.
     n = int(sys.argv[2]) # the number of the n-gram will be the third command line argument.
     comparison_files = sys.argv[3:] #All command line arguments from the fourth one onwards are the comparsion files.
-    master_text = read_filepath(master_file)
-    master_freq = ngram_frequency(master_text,n)
+    master_text = read_filepath(master_file) #reads the text from the master_file
+    master_freq = ngram_frequency(master_text,n) #gets the ngram frequency of the master text.
+
+    best_sim = -1 #default variable assignment, because the similarity will obviously never be -1. Must be at least 0.
+    most_similar_file = None #creates an empty variable assignment to be assigned once the most similar file is decided
+    for comp_file in comparison_files: # iterates through the comparison files
+        comp_text = read_filepath(comp_file) #reads the contents of the current comparison file
+        comp_freq = ngram_frequency(comp_text, n) #gets the ngram frequency of the comp_text
+        sim_score = similarity_score(master_freq, comp_freq) #calculates the similarity score
+        print(f'>>> Sim("{master_file}","{comp_file}") = {sim_score:.3f}') # prints the similarity score to 3 floating point decimals
+        if sim_score > best_sim:
+            best_sim = sim_score
+            most_similar_file = comp_file
+
+    print(f' File"{most_similar_file}" is most similar to file "{master_file}"')
+
+if __name__ == "__main__":
+    main()
