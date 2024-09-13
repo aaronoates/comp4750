@@ -23,3 +23,19 @@ def diff_ngrams(freq1, freq2):
     diff_sum = 0.0
     for n_gram in all_ngrams:
         diff_sum += abs(freq1.get(n_gram,0) - freq2.get(n_gram,0)) # gets the frequency of the given ngram in dictionary 1 if it exists, defaults to 0 if not. Then it does the same thing for dictionary 2. we then subtract frequency1 from frequency 2, get the absolute value of the difference, and then the result is assigned to diff_sum.
+    return diff_sum
+def similarity_score(master_freq, comparison_freq):
+    diff_sum = diff_ngrams(master_freq, comparison_freq)
+    similarity = 1.0 - (diff_ngrams/2.0)
+    return similarity
+
+def main():
+    if len(sys.argv) < 4: #ensures that there are at least 4 command line arguments
+        print("usage: python3 tcomp1.py filename n file1name file2name...")
+        return
+    
+    master_file = sys.argv[1] #the master file will be the second command line argument.
+    n = int(sys.argv[2]) # the number of the n-gram will be the third command line argument.
+    comparison_files = sys.argv[3:] #All command line arguments from the fourth one onwards are the comparsion files.
+    master_text = read_filepath(master_file)
+    master_freq = ngram_frequency(master_text,n)
