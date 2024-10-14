@@ -1,0 +1,625 @@
+Script started on Fri 21 Sep 2018 12:32:25 PM NDT
+$ python reconstruct.py
+usage: python reconstruct.py surface/lexical wlf/wsf F1 F2 ... Fn
+$ python reconstruct.py surface word.lex vcePlu.fst
+Composed FST has 6 states and 34 transitions
+Lexical form: tpbdeoszSZP
+Reconstructed surface forms:
+------------------------
+Lexical form: potPs
+Reconstructed surface forms:
+potPs
+------------------------
+Lexical form: podPs
+Reconstructed surface forms:
+podPz
+------------------------
+Lexical form: poSPs
+Reconstructed surface forms:
+poSPs
+------------------------
+Lexical form: poZPs
+Reconstructed surface forms:
+poZPz
+------------------------
+Lexical form: SopPs
+Reconstructed surface forms:
+SopPs
+------------------------
+Lexical form: ZopPs
+Reconstructed surface forms:
+ZopPs
+------------------------
+Lexical form: doPs
+Reconstructed surface forms:
+doPz
+------------------------
+Lexical form: dopPs
+Reconstructed surface forms:
+dopPs
+------------------------
+Lexical form: bosPs
+Reconstructed surface forms:
+bosPs
+------------------------
+Lexical form: bots
+Reconstructed surface forms:
+bots
+------------------------
+Lexical form: bodz
+Reconstructed surface forms:
+bodz
+------------------------
+Lexical form: boSes
+Reconstructed surface forms:
+boSes
+------------------------
+Lexical form: boZes
+Reconstructed surface forms:
+boZes
+------------------------
+Lexical form: bozes
+Reconstructed surface forms:
+bozes
+------------------------
+$ python reconstruct.py lexical word.srf vcePlu.fst
+Composed FST has 6 states and 34 transitions
+Surface form: pots
+Reconstructed lexical forms:
+pots
+------------------------
+Surface form: podz
+Reconstructed lexical forms:
+podz
+------------------------
+Surface form: poSes
+Reconstructed lexical forms:
+poSes
+------------------------
+Surface form: poZes
+Reconstructed lexical forms:
+poZes
+------------------------
+Surface form: Sops
+Reconstructed lexical forms:
+Sops
+------------------------
+Surface form: Zops
+Reconstructed lexical forms:
+Zops
+------------------------
+Surface form: doz
+Reconstructed lexical forms:
+doz
+------------------------
+Surface form: dops
+Reconstructed lexical forms:
+dops
+------------------------
+Surface form: bots
+Reconstructed lexical forms:
+bots
+------------------------
+Surface form: bodz
+Reconstructed lexical forms:
+bodz
+------------------------
+Surface form: boSes
+Reconstructed lexical forms:
+boSes
+------------------------
+Surface form: boZes
+Reconstructed lexical forms:
+boZes
+------------------------
+Surface form: boses
+Reconstructed lexical forms:
+boses
+------------------------
+Surface form: bozes
+Reconstructed lexical forms:
+bozes
+------------------------
+$ python reconstruct.py surface word.lex addVowPlu.fst
+Composed FST has 6 states and 35 transitions
+Lexical form: tpbdeoszSZP
+Reconstructed surface forms:
+------------------------
+Lexical form: potPs
+Reconstructed surface forms:
+potPs
+------------------------
+Lexical form: podPs
+Reconstructed surface forms:
+podPs
+------------------------
+Lexical form: poSPs
+Reconstructed surface forms:
+poSPes
+------------------------
+Lexical form: poZPs
+Reconstructed surface forms:
+poZPes
+------------------------
+Lexical form: SopPs
+Reconstructed surface forms:
+SopPs
+------------------------
+Lexical form: ZopPs
+Reconstructed surface forms:
+ZopPs
+------------------------
+Lexical form: doPs
+Reconstructed surface forms:
+doPs
+------------------------
+Lexical form: dopPs
+Reconstructed surface forms:
+dopPs
+------------------------
+Lexical form: bosPs
+Reconstructed surface forms:
+bosPes
+------------------------
+Lexical form: bots
+Reconstructed surface forms:
+bots
+------------------------
+Lexical form: bodz
+Reconstructed surface forms:
+bodz
+------------------------
+Lexical form: boSes
+Reconstructed surface forms:
+boSes
+------------------------
+Lexical form: boZes
+Reconstructed surface forms:
+boZes
+------------------------
+Lexical form: bozes
+Reconstructed surface forms:
+bozes
+------------------------
+$ python reconstruct.py lexical word.srf addVowPlu.fst
+Composed FST has 6 states and 35 transitions
+Surface form: pots
+Reconstructed lexical forms:
+pots
+------------------------
+Surface form: podz
+Reconstructed lexical forms:
+podz
+------------------------
+Surface form: poSes
+Reconstructed lexical forms:
+poSes
+------------------------
+Surface form: poZes
+Reconstructed lexical forms:
+poZes
+------------------------
+Surface form: Sops
+Reconstructed lexical forms:
+Sops
+------------------------
+Surface form: Zops
+Reconstructed lexical forms:
+Zops
+------------------------
+Surface form: doz
+Reconstructed lexical forms:
+doz
+------------------------
+Surface form: dops
+Reconstructed lexical forms:
+dops
+------------------------
+Surface form: bots
+Reconstructed lexical forms:
+bots
+------------------------
+Surface form: bodz
+Reconstructed lexical forms:
+bodz
+------------------------
+Surface form: boSes
+Reconstructed lexical forms:
+boSes
+------------------------
+Surface form: boZes
+Reconstructed lexical forms:
+boZes
+------------------------
+Surface form: boses
+Reconstructed lexical forms:
+boses
+------------------------
+Surface form: bozes
+Reconstructed lexical forms:
+bozes
+------------------------
+$ python reconstruct.py surface word.lex vcePlu.fst addVowPlu.fst
+Composed FST has 36 states and 113 transitions
+Lexical form: tpbdeoszSZP
+Reconstructed surface forms:
+------------------------
+Lexical form: potPs
+Reconstructed surface forms:
+potPs
+------------------------
+Lexical form: podPs
+Reconstructed surface forms:
+podPz
+------------------------
+Lexical form: poSPs
+Reconstructed surface forms:
+poSPes
+------------------------
+Lexical form: poZPs
+Reconstructed surface forms:
+poZPez
+------------------------
+Lexical form: SopPs
+Reconstructed surface forms:
+SopPs
+------------------------
+Lexical form: ZopPs
+Reconstructed surface forms:
+ZopPs
+------------------------
+Lexical form: doPs
+Reconstructed surface forms:
+doPz
+------------------------
+Lexical form: dopPs
+Reconstructed surface forms:
+dopPs
+------------------------
+Lexical form: bosPs
+Reconstructed surface forms:
+bosPes
+------------------------
+Lexical form: bots
+Reconstructed surface forms:
+bots
+------------------------
+Lexical form: bodz
+Reconstructed surface forms:
+bodz
+------------------------
+Lexical form: boSes
+Reconstructed surface forms:
+boSes
+------------------------
+Lexical form: boZes
+Reconstructed surface forms:
+boZes
+------------------------
+Lexical form: bozes
+Reconstructed surface forms:
+bozes
+------------------------
+$ python econstruct.py lexical word.srf vcePlu.fst addVowPlu.fst
+python: can't open file 'econstruct.py': [Errno 2] No such file or directory
+$ python reconstruct.py lexical word.srf vcePlu.fst addVowPlu.fst
+Composed FST has 36 states and 113 transitions
+Surface form: pots
+Reconstructed lexical forms:
+pots
+------------------------
+Surface form: podz
+Reconstructed lexical forms:
+podz
+------------------------
+Surface form: poSes
+Reconstructed lexical forms:
+poSes
+------------------------
+Surface form: poZes
+Reconstructed lexical forms:
+poZes
+------------------------
+Surface form: Sops
+Reconstructed lexical forms:
+Sops
+------------------------
+Surface form: Zops
+Reconstructed lexical forms:
+Zops
+------------------------
+Surface form: doz
+Reconstructed lexical forms:
+doz
+------------------------
+Surface form: dops
+Reconstructed lexical forms:
+dops
+------------------------
+Surface form: bots
+Reconstructed lexical forms:
+bots
+------------------------
+Surface form: bodz
+Reconstructed lexical forms:
+bodz
+------------------------
+Surface form: boSes
+Reconstructed lexical forms:
+boSes
+------------------------
+Surface form: boZes
+Reconstructed lexical forms:
+boZes
+------------------------
+Surface form: boses
+Reconstructed lexical forms:
+boses
+------------------------
+Surface form: bozes
+Reconstructed lexical forms:
+bozes
+------------------------
+$ python reconstruct.py surface word.lex vcePlu.fst addVowPlu.fst delPlu1.fst
+Composed FST has 72 states and 222 transitions
+Lexical form: tpbdeoszSZP
+Reconstructed surface forms:
+------------------------
+Lexical form: potPs
+Reconstructed surface forms:
+pots
+------------------------
+Lexical form: podPs
+Reconstructed surface forms:
+podz
+------------------------
+Lexical form: poSPs
+Reconstructed surface forms:
+poSes
+------------------------
+Lexical form: poZPs
+Reconstructed surface forms:
+poZez
+------------------------
+Lexical form: SopPs
+Reconstructed surface forms:
+Sops
+------------------------
+Lexical form: ZopPs
+Reconstructed surface forms:
+Zops
+------------------------
+Lexical form: doPs
+Reconstructed surface forms:
+doz
+------------------------
+Lexical form: dopPs
+Reconstructed surface forms:
+dops
+------------------------
+Lexical form: bosPs
+Reconstructed surface forms:
+boses
+------------------------
+Lexical form: bots
+Reconstructed surface forms:
+bots
+------------------------
+Lexical form: bodz
+Reconstructed surface forms:
+bodz
+------------------------
+Lexical form: boSes
+Reconstructed surface forms:
+boSes
+------------------------
+Lexical form: boZes
+Reconstructed surface forms:
+boZes
+------------------------
+Lexical form: bozes
+Reconstructed surface forms:
+bozes
+------------------------
+$ python reconstruct.py lexical word.srf vcePlu.fst addVowPlu.fst delPlu1.fst
+Composed FST has 72 states and 222 transitions
+Surface form: pots
+Reconstructed lexical forms:
+pots
+potPs
+------------------------
+Surface form: podz
+Reconstructed lexical forms:
+podPs
+podz
+------------------------
+Surface form: poSes
+Reconstructed lexical forms:
+poSes
+poSPs
+------------------------
+Surface form: poZes
+Reconstructed lexical forms:
+poZes
+------------------------
+Surface form: Sops
+Reconstructed lexical forms:
+Sops
+SopPs
+------------------------
+Surface form: Zops
+Reconstructed lexical forms:
+Zops
+ZopPs
+------------------------
+Surface form: doz
+Reconstructed lexical forms:
+doPs
+doz
+------------------------
+Surface form: dops
+Reconstructed lexical forms:
+dops
+dopPs
+------------------------
+Surface form: bots
+Reconstructed lexical forms:
+bots
+botPs
+------------------------
+Surface form: bodz
+Reconstructed lexical forms:
+bodPs
+bodz
+------------------------
+Surface form: boSes
+Reconstructed lexical forms:
+boSes
+boSPs
+------------------------
+Surface form: boZes
+Reconstructed lexical forms:
+boZes
+------------------------
+Surface form: boses
+Reconstructed lexical forms:
+boses
+bosPs
+------------------------
+Surface form: bozes
+Reconstructed lexical forms:
+bozes
+------------------------
+$ python reconstruct.py surface word.lex vcePlu.fst addVowPlu.fst delPlu2.fst
+Composed FST has 144 states and 191 transitions
+Lexical form: tpbdeoszSZP
+Reconstructed surface forms:
+------------------------
+Lexical form: potPs
+Reconstructed surface forms:
+pots
+------------------------
+Lexical form: podPs
+Reconstructed surface forms:
+podz
+------------------------
+Lexical form: poSPs
+Reconstructed surface forms:
+poSes
+------------------------
+Lexical form: poZPs
+Reconstructed surface forms:
+poZez
+------------------------
+Lexical form: SopPs
+Reconstructed surface forms:
+Sops
+------------------------
+Lexical form: ZopPs
+Reconstructed surface forms:
+Zops
+------------------------
+Lexical form: doPs
+Reconstructed surface forms:
+doz
+------------------------
+Lexical form: dopPs
+Reconstructed surface forms:
+dops
+------------------------
+Lexical form: bosPs
+Reconstructed surface forms:
+boses
+------------------------
+Lexical form: bots
+Reconstructed surface forms:
+bots
+------------------------
+Lexical form: bodz
+Reconstructed surface forms:
+bodz
+------------------------
+Lexical form: boSes
+Reconstructed surface forms:
+boSes
+------------------------
+Lexical form: boZes
+Reconstructed surface forms:
+boZes
+------------------------
+Lexical form: bozes
+Reconstructed surface forms:
+bozes
+------------------------
+$ python reconstruct.py lexical word.srf vcePlu.fst addVowPlu.fst delPlu2.fst
+Composed FST has 144 states and 191 transitions
+Surface form: pots
+Reconstructed lexical forms:
+pots
+potPs
+------------------------
+Surface form: podz
+Reconstructed lexical forms:
+podPs
+podz
+------------------------
+Surface form: poSes
+Reconstructed lexical forms:
+poSes
+poSPs
+------------------------
+Surface form: poZes
+Reconstructed lexical forms:
+poZes
+------------------------
+Surface form: Sops
+Reconstructed lexical forms:
+Sops
+SopPs
+------------------------
+Surface form: Zops
+Reconstructed lexical forms:
+Zops
+ZopPs
+------------------------
+Surface form: doz
+Reconstructed lexical forms:
+doPs
+doz
+------------------------
+Surface form: dops
+Reconstructed lexical forms:
+dops
+dopPs
+------------------------
+Surface form: bots
+Reconstructed lexical forms:
+bots
+botPs
+------------------------
+Surface form: bodz
+Reconstructed lexical forms:
+bodPs
+bodz
+------------------------
+Surface form: boSes
+Reconstructed lexical forms:
+boSes
+boSPs
+------------------------
+Surface form: boZes
+Reconstructed lexical forms:
+boZes
+------------------------
+Surface form: boses
+Reconstructed lexical forms:
+bosPs
+boses
+------------------------
+Surface form: bozes
+Reconstructed lexical forms:
+bozes
+------------------------
+$ 
+
+Script done on Fri 21 Sep 2018 12:35:48 PM NDT
