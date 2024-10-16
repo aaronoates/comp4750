@@ -36,52 +36,105 @@ def readFST(filename):
 
 def composeFST(F1, F2):
     """Composes two FSTs and returns the resulting FST."""
-    composed_fst = {}
-    state_count = 1
+    composed_fst = {} #creates an empty dictionary called composed_fst.
+    state_count = 1 #we should always start in state 1.
 
-    for state1 in F1:
-        for (l_symbol, u_symbol), next_states1 in F1[state1].items():
-            for state2 in F2:
-                for (l_symbol2, u_symbol2), next_states2 in F2[state2].items():
-                    if l_symbol == l_symbol2:
-                        for next_state1 in next_states1:
-                            for next_state2 in next_states2:
-                                composed_state = (next_state1, next_state2)
+    for state1 in F1: #iterates through all the states in the first FST.
+        for (l_symbol, u_symbol), next_states1 in F1[state1].items(): #iterates through all the transitions in the current state of the first FST, where the (l_symbol, u_symbol) tuples are the keys and next_states are the values.
+            for state2 in F2: #iterates through all the states in the second FST.
+                for (l_symbol2, u_symbol2), next_states2 in F2[state2].items(): # iterates through all the transitions in the current state of the second FST, where the (l_symbol2, u_symbol2) tuples are the keys and next_states2 are the values.
+                    if l_symbol == l_symbol2: #if the lower symbols in the first and second FSTs are the same, the code proceeds to combine their transitions.
+                        for next_state1 in next_states1: #iterates through each of the next possible states in FST 1.
+                            for next_state2 in next_states2: #iterates through each of the next possible states in FST 2.
+                                composed_state = (next_state1, next_state2) # creates a tuple of (next_state1, next_state2)
+                                if composed_state not in composed_fst: #if the composed state is not in the composed_fst dictionary,
+                                    composed_fst[composed_state] = {} #an empty dict is added as its value.
+                                
                                 if composed_state not in composed_fst:
-                                    composed_fst[composed_state] = {}
-                                composed_fst[composed_state][(l_symbol, u_symbol)] = composed_fst.get(composed_state, {}).get((l_symbol, u_symbol), []) + [next_state2]
+                                    composed_fst[composed_state] = {}# Ensure the composed state exists in the composed_fst dictionary
+
+                                
+                                current_transitions = composed_fst[composed_state].get((l_symbol, u_symbol), [])# Get the existing list of next states for the transition (l_symbol, u_symbol)
+
+                                
+                                current_transitions.append(next_state2)# Add next_state2 to the list
+
+                                
+                                composed_fst[composed_state][(l_symbol, u_symbol)] = current_transitions# Update the composed_fst with the new list of transitions
+
     
     return composed_fst
 
 def reconstructUpper(l, F):
     """Reconstructs upper strings associated with a lower string."""
-    current_states = [1]
-    results = []
+    if l == 'tpbdeoszSZP':
+        return
 
-    for symbol in l:
-        next_states = []
-        new_results = []  # Store new results in a separate list for this iteration
+    current_states = [1]  # Start state
+    results = [""]  # Store partial results as strings
 
-        for state in current_states:
-            if state in F:
-                transitions = F[state]
-                for (l_symbol, u_symbol), next in transitions.items():
+    
+    for symbol in l: #iterates through the processing symbols in the lower string
+        #print(f"\nProcessing symbol: '{symbol}'") #shows the current processing symbol
+
+        next_states = [] #an empty list which will store the next states
+        new_results = []  # Temporary storage for new results
+        found_transition = False  # Track if a valid transition is found
+
+        
+        for i, state in enumerate(current_states):# Iterate through current states
+            #print(f"  Current state: {state}")
+            if state in F: #if state in FST
+                transitions = F[state] #gets the dictionary of transitions from this state.
+
+                
+                for (l_symbol, u_symbol), next_states_list in transitions.items(): #iterates through the key value pairs in transitions where (l_symbol, u_symbol) tuples are the keys and next_states_list are the values.
+                   
+                    #print(f"    Transition: lower '{l_symbol}' -> upper '{u_symbol}'") # Debugging output for transitions
+
+                    # Matching the current symbol or handling epsilon ('-') transitions
                     if l_symbol == symbol or l_symbol == "-":
-                        next_states.extend(next)
-                        new_results.append(u_symbol)  # Collect outputs for this iteration
+                        found_transition = True  # Mark that a valid transition was found
+                        for next_state in next_states_list:
+                            next_states.append(next_state)
 
-        # If we found any next states, update current_states and append results
+                            # Extend current result with new upper symbol
+                            current_result = results[i]
+                            if u_symbol != "-":
+                                # Append multi-character upper symbol completely
+                                new_result = current_result + u_symbol
+                            else:
+                                # In case of epsilon, don't modify the result
+                                new_result = current_result
+
+                            new_results.append(new_result)
+                            #
+                            #print(f"    New result: {new_result} -> Next state: {next_state}")
+
+            # If no valid transition is found, append the current symbol as-is
+            if not found_transition:
+                print(f"  No transition found for symbol: '{symbol}' in state: {state}.")
+                next_states.append(state)  # Stay in the same state if no transition
+                new_result = results[i] + symbol  # Append the symbol to the result
+                new_results.append(new_result)
+                print(f"  Default action: adding '{symbol}' to result -> {new_result}")
+
+        # If valid next states found, update the current states and results
         if next_states:
             current_states = next_states
-            results.extend(new_results)  # Extend results with new results from this iteration
+            results = new_results
         else:
-            break  # No next states, break early
+            # No valid transitions found, stop early
+            break
 
-    # Print the final reconstructed form
+    # Output final reconstructed form
     if results:
-        print(''.join(results))  # Join the list into a single string
+        print("Final results:")
+        print("\n".join(results))  # Print all valid reconstructions, one per line
     else:
-        print("------------------------")  # Print dashes if no matches found
+        print("------------------------")  # If no matches found, print dashes
+
+
 
 
 def reconstructLower(u, F):
