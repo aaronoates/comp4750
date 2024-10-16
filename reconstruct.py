@@ -57,22 +57,32 @@ def reconstructUpper(l, F):
     """Reconstructs upper strings associated with a lower string."""
     current_states = [1]
     results = []
-    
+
     for symbol in l:
         next_states = []
+        new_results = []  # Store new results in a separate list for this iteration
+
         for state in current_states:
             if state in F:
                 transitions = F[state]
                 for (l_symbol, u_symbol), next in transitions.items():
                     if l_symbol == symbol or l_symbol == "-":
                         next_states.extend(next)
-                        results.append(u_symbol)  # Append directly to the results list
-        current_states = next_states
-    
+                        new_results.append(u_symbol)  # Collect outputs for this iteration
+
+        # If we found any next states, update current_states and append results
+        if next_states:
+            current_states = next_states
+            results.extend(new_results)  # Extend results with new results from this iteration
+        else:
+            break  # No next states, break early
+
+    # Print the final reconstructed form
     if results:
         print(''.join(results))  # Join the list into a single string
     else:
-        print("No matches found.")
+        print("------------------------")  # Print dashes if no matches found
+
 
 def reconstructLower(u, F):
     """Reconstructs lower strings associated with an upper string."""
