@@ -56,7 +56,7 @@ def composeFST(F1, F2):
 def reconstructUpper(l, F):
     """Reconstructs upper strings associated with a lower string."""
     current_states = [1]
-    results = []
+    results = set()
     
     for symbol in l:
         next_states = []
@@ -66,18 +66,15 @@ def reconstructUpper(l, F):
                 for (l_symbol, u_symbol), next in transitions.items():
                     if l_symbol == symbol or l_symbol == "-":
                         next_states.extend(next)
-                        results.append(u_symbol)  # Append directly to the results list
+                        results.add(u_symbol)
         current_states = next_states
     
-    if results:
-        print(''.join(results))  # Join the list into a single string
-    else:
-        print("No matches found.")
-
+    print(''.join(results) if results else "No matches found.")
+    
 def reconstructLower(u, F):
     """Reconstructs lower strings associated with an upper string."""
     current_states = [1]
-    results = []
+    results = set()
     
     for symbol in u:
         next_states = []
@@ -87,13 +84,10 @@ def reconstructLower(u, F):
                 for (l_symbol, u_symbol), next in transitions.items():
                     if u_symbol == symbol or u_symbol == "-":
                         next_states.extend(next)
-                        results.append(l_symbol)  # Append directly to the results list
+                        results.add(l_symbol)
         current_states = next_states
     
-    if results:
-        print(''.join(results))  # Join the list into a single string
-    else:
-        print("No matches found.")
+    print(''.join(results) if results else "No matches found.")
 
 def main():
     if len(sys.argv) < 4:
