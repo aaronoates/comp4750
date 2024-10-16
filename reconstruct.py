@@ -2,37 +2,37 @@ import sys
 
 def readFST(filename):
     """Reads an FST description from a file and returns it as a dictionary."""
-    with open(filename, 'r') as f:
-        first_line = f.readline().strip().split()
-        num_states = int(first_line[0])
-        alphabet = first_line[1]
+    with open(filename, 'r') as f: #reads the file with name filename
+        first_line = f.readline().strip().split() #reads the next line of the file, which in this case is the first line. It then strips leading and trailing whitespace, and creates a list of all elements in the line separated by whitespace.
+        num_states = int(first_line[0]) #first element of first_line will be the number of states.
+        alphabet = first_line[1] # a string containing all the upper and lowercase letters in the FST.
         
-        fst = {}
-        for i in range(1, num_states + 1):
-            fst[i] = {}
+        fst = {} #creates an empty dictionary called fst.
+        for i in range(1, num_states + 1): 
+            fst[i] = {} #turns fst into a dictionary of empty dictionaries one for each state.
 
-        for _ in range(num_states):
-            state_info = f.readline().strip().split()
-            state_num = int(state_info[0])
-            is_final = state_info[1] == 'F'
+        for _ in range(num_states): 
+            state_info = f.readline().strip().split() #reads the next line of the file, which at this point in the for loop should be the start of a new state.
+            state_num = int(state_info[0]) #the first element of state_info should be the number of the current state.
+            is_final = state_info[1] == 'F' #will be true if the state is final.
             
             while True:
-                position = f.tell()
-                line = f.readline().strip()
-                if line == '':
-                    break
-                parts = line.split()
-                if len(parts) != 3:
-                    f.seek(position)
-                    break
-                l_symbol, u_symbol, next_state = parts
-                next_state = int(next_state)
+                position = f.tell() #gets the location of the current line in the script
+                line = f.readline().strip() #reads the next line, and strips trailing and leading whitespace.
+                if line == '': #means that there are no more state transitions.
+                    break #breaks the loop.
+                parts = line.split() # if the current line represents a state transition, split it up into elements separated by whitespace.
+                if len(parts) != 3: #if the current line has a length that is not 3, it means it is the start of a new state. there fore, go back to the position defined earlier.
+                    f.seek(position) # go back to the position described earlier, so that it can be ran at the beginning of the next iteration of the for loop.
+                    break #break the while loop, start the next iteration of the for loop.
+                l_symbol, u_symbol, next_state = parts #the first element of parts is the l_symbol, the second is the u_symbol, the third is the next_state.
+                next_state = int(next_state) #converts the string version of the number into the integer version.
                 
-                if (l_symbol, u_symbol) not in fst[state_num]:
-                    fst[state_num][(l_symbol, u_symbol)] = []
-                fst[state_num][(l_symbol, u_symbol)].append(next_state)
+                if (l_symbol, u_symbol) not in fst[state_num]: #if the current transition doesn't exist in the transitions for the current state, this line will be true.
+                    fst[state_num][(l_symbol, u_symbol)] = [] #initializes an empty dictionary which will hold all the possible next states with this transition.
+                fst[state_num][(l_symbol, u_symbol)].append(next_state) # appends the number representing the next state to the dictionary of possible next states.
                 
-        return fst
+        return fst #returns the fst
 
 def composeFST(F1, F2):
     """Composes two FSTs and returns the resulting FST."""
