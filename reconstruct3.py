@@ -83,30 +83,33 @@ def reconstructUpper(l, F):
         found_transition = False  # Track if a valid transition is found
         prev_symbols = [] #tracks what symbols have been processed
         
-        for i, state in enumerate(current_states):# Iterate through current states
-            #print(f"  Current state: {state}")
+        for i, state in enumerate(current_states):
+            
             if state in F: #if state in FST
                 transitions = F[state] #gets the dictionary of transitions from this state.
                 
                 
-                for (l_symbol, u_symbol), next_states_list in transitions.items(): 
+                for (l_symbol, u_symbol), next_states_list in transitions.items(): #the symbol tuples are the keys and the next_states_list are the values
                     
                    
 
                    
-                    if l_symbol == symbol or l_symbol == "-":
+                    if l_symbol == symbol or l_symbol == "-": #checks if current symbol matches l_symbol in tuple, or if it is epsilon
                         found_transition = True  
                         for next_state in next_states_list: 
                             next_states.append(next_state) 
+                            #print(next_states)
 
                             
                             current_result = results[i]
+                            print(results)
                             if u_symbol != "-":
                                 
                                 new_result = current_result + u_symbol
                             else:
                                 
-                                current_result = current_result + 'u'
+                                current_result = current_result + 'e'
+                                new_result = current_result
 
                             new_results.append(new_result)
                             
