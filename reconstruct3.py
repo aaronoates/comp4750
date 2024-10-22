@@ -37,6 +37,8 @@ def readFST(filename):
 
 
 def composeFST(F1, F2):
+    print(F1)
+    print(F2)
     composed_FST = {}
     transition_count = 0  # Counter for transitions
 
@@ -55,17 +57,10 @@ def composeFST(F1, F2):
                         new_input_output_pair = (input1, output2)  # New transition (input from F1, output from F2)
 
                         # For each possible next state in F1 and F2
-                        for next_state_F1 in next_states_F1:
-                            for next_state_F2 in next_states_F2:
-                                next_composed_state = (next_state_F1, next_state_F2)
-
-                                # Add this transition to the composed FST
-                                if new_input_output_pair not in composed_FST[composed_state]:
-                                    composed_FST[composed_state][new_input_output_pair] = []
-                                composed_FST[composed_state][new_input_output_pair].append(next_composed_state)
-                                
-                                # Increment the transition count
-                                transition_count += 1
+                        if new_input_output_pair not in composed_FST[composed_state]:
+                            composed_FST[composed_state][new_input_output_pair] = []
+                        next_composed_state = (next_states_F1, next_states_F2)
+                        composed_FST[composed_state][new_input_output_pair].append(next_composed_state)
 
     # Print the composed FST
    
@@ -97,6 +92,7 @@ def reconstructUpper(l, F):
         
         # Iterate over all current states and find valid transitions
         for state in current_states:
+            #print(state)
             if state in F:
                 transitions = F[state]
                 for (l_symbol_fst, u_symbol), states in transitions.items():
@@ -128,33 +124,51 @@ def reconstructUpper(l, F):
     # Output the result
     print("".join(result))
 
-def reconstructLower(u, f):
-    state = 1  # start at state 1
-    lower_string = ""  # to store the resulting lower string
-    i = 0  # index to traverse the upper string
+def reconstructLower(u, F):
+    if isinstance(list(F.keys())[0], tuple):  # Check if states are tuples (composed FST)
+        current_states = [(1, 1)]  # Starting at state (1, 1)
+    else:  # Uncomposed FST # Starting at state 1, assuming state numbering starts from 1
+        current_states = [1]
+    position = 0
+    result = []
 
-    while i < len(u):
-        upper_symbol = u[i]
-        found = False
+    while current_states and position < len(u):
+        u_symbol = u[position]  # Read the current symbol from the lexical form
+        next_states = []
+        found = False  # Tracks if a valid transition was found
         
-        # Check all transitions for the current state
-        for transition in f[state]:
-            lower_symbol, transition_upper, next_state = transition
-            
-            if transition_upper == upper_symbol:
-                # If matching upper symbol is found, append the corresponding lower symbol
-                lower_string += lower_symbol
-                state = next_state  # move to the next state
-                found = True
+        # Iterate over all current states and find valid transitions
+        for state in current_states:
+            if state in F:
+                transitions = F[state]
+                for (l_symbol, u_symbol_fst), states in transitions.items():
+                    if u_symbol_fst == u_symbol:
+                        found = True
+                        result.append(l_symbol)  # Append the upper symbol to the result
+                        next_states.extend(states)  # Add the next possible states
+                        break
+            if found:
                 break
-        
-        if not found:
-            # If no valid transition is found, append the upper symbol as-is and stay in the same state
-            lower_string += upper_symbol
-        
-        i += 1  # move to the next symbol in the upper string
 
-    return lower_string
+        if not found:
+            # If no valid transition is found, output the upper symbol as is and don't consume the lower symbol
+            for state in current_states:
+                if state in F:
+                    transitions = F[state]
+                    # Find any transition in the current state and output its upper symbol
+                    for (l_symbol, u_symbol_fst), states in transitions.items():
+                        result.append(l_symbol)  # Append the upper symbol to the result
+                        next_states.extend(states)  # Move to the next states
+                        break
+
+        # If a valid transition was found, consume the lower symbol
+        if found:
+            position += 1
+
+        current_states = next_states
+
+    # Output the result
+    print("".join(result))
 
 
 def main():
@@ -177,7 +191,7 @@ def main():
     for fst in fst_list[1:]: # if there are arguments beyond sys.argv[3] we run this for loop until all fsts are accounted for.
         combined_fst = composeFST(combined_fst, fst) # after this loop ends, the combined_fst will be a combined fst of all the fsts.
 
-    print(combined_fst)
+    #print(combined_fst)
     #if there is only one element in fst_list, then the for loop doesn't execute. This makes sense, because if we call compose_FST and pass an empty list to F2, the combined_fst will just be F1.
     # Output number of states and transitions
     num_states = len(combined_fst) #the number of inner dictionaries in the outer dictionary should give the number of states.
