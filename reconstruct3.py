@@ -37,39 +37,24 @@ def readFST(filename):
 
 
 def composeFST(F1, F2):
-    print(F1)
-    print(F2)
-    composed_FST = {}
-    transition_count = 0  # Counter for transitions
+    #print(F1)
+    #print(F2)
+    composed_FST = {} #initialize an empty dictionary which will eventually represent the composed FST.
+    transition_count = 0  # Counter for transitions.
+    for state_of_F1 in F1.keys(): #The states of the first FST
+        for state_of_F2 in F2.keys(): #Thw states of the second FST.
+            composed_state = (state_of_F1, state_of_F2) #a tuple representing a new composed state in the FST.
+            composed_FST[composed_state] = {} #Initialize transitions for the new state.
 
-    # Iterate over all states in F1 and F2
-    for s1 in F1:
-        for s2 in F2:
-            composed_state = (s1, s2)  # New state in the composed FST
-            composed_FST[composed_state] = {}  # Initialize transitions for the new state
-
-            # Iterate over transitions from state s1 in F1
-            for (input1, output1), next_states_F1 in F1[s1].items():
-                # Iterate over transitions from state s2 in F2
-                for (input2, output2), next_states_F2 in F2[s2].items():
-                    # Only compose transitions where F1's output matches F2's input
-                    if output1 == input2:
-                        new_input_output_pair = (input1, output2)  # New transition (input from F1, output from F2)
-
-                        # For each possible next state in F1 and F2
-                        if new_input_output_pair not in composed_FST[composed_state]:
-                            composed_FST[composed_state][new_input_output_pair] = []
-                        next_composed_state = (next_states_F1, next_states_F2)
-                        composed_FST[composed_state][new_input_output_pair].append(next_composed_state)
-
-    # Print the composed FST
-   
-        #for (input_sym, output_sym), next_states in transitions.items():
-            #print(f"  On ({input_sym}, {output_sym}) -> {next_states}")
-
-    # Print the number of transitions in the composed FST
-    #print(f"\nTotal transitions in the composed FST: {transition_count}")
-    #print(composed_FST)
+            for (lower_1, upper_1), next_state_of_F1 in F1[state_of_F1].items():
+                for(lower_2, upper_2), next_state_of_F2 in F2[state_of_F2].items():
+                    #print(F2[state_of_F2])
+                    if upper_1 == lower_2: #in a composed FST, the upper string in the first FST should become the lower string in the second FST in order to make a valid transition.
+                        composed_ul_pair = (lower_1, upper_2)
+                        composed_next_state = (next_state_of_F1, next_state_of_F2)
+                        if composed_ul_pair not in composed_FST[composed_state]:
+                            composed_FST[composed_state][composed_ul_pair] = []
+                        composed_FST[composed_state][composed_ul_pair].append(composed_next_state)
     return composed_FST
 
 
@@ -78,6 +63,7 @@ def composeFST(F1, F2):
 # Example FSTs
 
 def reconstructUpper(l, F):
+    #print(F)
     if isinstance(list(F.keys())[0], tuple):  # Check if states are tuples (composed FST)
         current_states = [(1, 1)]  # Starting at state (1, 1)
     else:  # Uncomposed FST # Starting at state 1, assuming state numbering starts from 1
@@ -89,11 +75,11 @@ def reconstructUpper(l, F):
         l_symbol = l[position]  # Read the current symbol from the lexical form
         next_states = []
         found = False  # Tracks if a valid transition was found
-        
+
         # Iterate over all current states and find valid transitions
         for state in current_states:
             #print(state)
-            if state in F:
+            if state in list(F.keys()):
                 transitions = F[state]
                 for (l_symbol_fst, u_symbol), states in transitions.items():
                     if l_symbol_fst == l_symbol:
@@ -107,7 +93,7 @@ def reconstructUpper(l, F):
         if not found:
             # If no valid transition is found, output the upper symbol as is and don't consume the lower symbol
             for state in current_states:
-                if state in F:
+                if state in list(F.keys()):
                     transitions = F[state]
                     # Find any transition in the current state and output its upper symbol
                     for (l_symbol_fst, u_symbol), states in transitions.items():
