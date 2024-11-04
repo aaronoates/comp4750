@@ -1,26 +1,35 @@
-import sys
-import re
+import sys # for allowing the use of command-line arguments
 
-class Grammar:
-    def __init__(self):
-        self.rules = {}
+class Grammar: #Grammar class definition which will be used to store and retrieve grammar rules for parsing.
+    def __init__(self): #constructor method of the grammar class that is automatically run when an instance of this class is created.
+        self.rules = {} #initializes an empty dictionary named rules, which will hold grammar rules. The keys of this dictionary will be left-hand side (LHS) symbols, and the values will be lists of possible right-hand side (RHS) expansions.
     
-    def add_rule(self, lhs, rhs):
-        if lhs not in self.rules:
-            self.rules[lhs] = []
-        self.rules[lhs].append(rhs)
+    def add_rule(self, lhs, rhs): #add_rule method definition that takes 2 parameters: the left hand side symbol, and the right hand side symbol.
+        if lhs not in self.rules: #if the lhs is not currently a key in the rules dictionary
+            self.rules[lhs] = [] #create an empty list as its value
+        self.rules[lhs].append(rhs) #append the rhs to the list of rules for lhs in the rules dictionary.
     
-    def get_rhs(self, symbol):
-        return self.rules.get(symbol, [])
+    def get_rhs(self, symbol): # get_rhs method that takes one parameter, symbol.
+        return self.rules.get(symbol, []) #returns the list of RHS expansions for the given symbol. if symbol exists in the dictionary, returns its associated list of RHS expansions. else, returns an empty list.
 
-def parse_grammar(grammar_file):
-    grammar = Grammar()
-    with open(grammar_file, 'r') as file:
-        for line in file:
-            match = re.match(r'(\S+) -> ("[^"]+"|\S+ \S+|\S+)', line.strip())
-            if match:
-                lhs, rhs = match.groups()
-                rhs_symbols = rhs.strip('"').split()
+def parse_grammar(grammar_file): #defines a method parse_grammar that takes a single parameter grammar file.
+    grammar = Grammar() #creates an instance of the grammar class called grammar. this will store the grammar rules parsed from the file.
+    with open(grammar_file, 'r') as file: #reads from the grammar file
+        for line in file: #iterates through the lines of the file
+            line = line.strip() #eliminates leading and trailing whitespace
+            if '->' in line: # Will be true if this line contains a grammar rule.
+                lhs, rhs = line.split('->', 1) #splits the line at the first occurence of -> , creating two parts: lhs and rhs.
+                lhs = lhs.strip() #eliminates trailing and leading whitespace for lhs.
+                rhs = rhs.strip() #eliminates trailing and leading whitespace for rhs.
+
+                # Handle quoted strings and multiple symbols
+                if rhs.startswith('"') and rhs.endswith('"'):
+                    # Remove quotes around single words like "word"
+                    rhs_symbols = [rhs[1:-1]]
+                else:
+                    # Split multi-symbol RHS (like 'Det N')
+                    rhs_symbols = rhs.split()
+
                 grammar.add_rule(lhs, rhs_symbols)
     return grammar
 
@@ -35,9 +44,9 @@ def cky_parse(grammar, utterance):
 
     for j in range(1, n+1):
         word = words[j-1]
-        for lhs, rhs in grammar.rules.items():
-            for r in rhs:
-                if len(r) == 1 and r[0] == word:
+        for lhs, rhs_list in grammar.rules.items():
+            for rhs in rhs_list:
+                if len(rhs) == 1 and rhs[0] == word:
                     parse_table[j-1][j][lhs] = f'[{lhs} "{word}"]'
         
         for i in range(j-2, -1, -1):
