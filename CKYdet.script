@@ -1,0 +1,91 @@
+Script started on Sun 06 Nov 2016 02:57:36 PM NST
+>> python CKYdet.py g1.ecfg u1a.utt
+Utterance #1:
+  No valid parse
+
+Utterance #2:
+  No valid parse
+
+Utterance #3:
+  No valid parse
+
+>> python CKYdet.py g1.ecfg u1b.utt
+Utterance #1:
+  Parse #1: [S [NP [Det "the"] [N "dog"]] [VP [V "bit"] [NP [Det "the"] [N "rat"]]]]
+
+Utterance #2:
+  Parse #1: [S [NP [PN "Bob"]] [VP [V "admired"] [NP [Det "the"] [N "elephant"]]]]
+
+Utterance #3:
+  Parse #1: [S [NP [PN "Alice"]] [VP [V "chased"] [NP [PN "Alice"]]]]
+
+Utterance #4:
+  Parse #1: [S [NP [Det "the"] [N "rat"]] [VP [V "chased"] [NP [Det "the"] [N "elephant"]]]]
+
+>> python CKYdet.py g2.ecfg u2a.utt
+Utterance #1:
+  No valid parse
+
+Utterance #2:
+  No valid parse
+
+Utterance #3:
+  No valid parse
+
+Utterance #4:
+  No valid parse
+
+>> python CKYdet.py g2.ecfg u2b.utt
+Utterance #1:
+  Parse #1: [S [NP [Det "the"] [N "cat"]] [S1F [VF "cried"]]]
+
+Utterance #2:
+  Parse #1: [S [NP [Det "the"] [N "cat"]] [S1F [S2 [NP [Det "the"] [N "rat"]] [S1 [V "bit"]]] [VF "died"]]]
+
+Utterance #3:
+  Parse #1: [S [NP [Det "the"] [N "dog"]] [S1F [S2 [NP [Det "the"] [N "cat"]] [S1 [S2 [NP [Det "the"] [N "elephant"]] [S1 [S2 [NP [Det "the"] [N "cat"]] [S1 [V "bit"]]] [V "chased"]]] [V "admired"]]] [VF "burped"]]]
+
+>> python CKYdet.py g3.ecfg u3a.utt
+Utterance #1:
+  No valid parse
+
+Utterance #2:
+  No valid parse
+
+Utterance #3:
+  No valid parse
+
+>> python CKYdet.py g3.ecfg u3b.utt
+Utterance #1:
+  Parse #1: [S [NP [PN "Houston"]] [VP [V "shot"] [NP [Det "an"] [N "elephant"]]]]
+
+Utterance #2:
+  Parse #1: [S [NP [Prn "I"]] [VP [V "shot"] [NP [NP [Det "an"] [N "elephant"]] [PP [P "in"] [NP [Poss "my"] [N "pajamas"]]]]]]
+  Parse #2: [S [NP [Prn "I"]] [VP [VP [V "shot"] [NP [Det "an"] [N "elephant"]]] [PP [P "in"] [NP [Poss "my"] [N "pajamas"]]]]]
+  Parse #3: [S [X1 [NP [Prn "I"]] [VP [V "shot"] [NP [Det "an"] [N "elephant"]]]] [PP [P "in"] [NP [Poss "my"] [N "pajamas"]]]]
+
+Utterance #3:
+  Parse #1: [S [VP [V "book"] [NP [NP [Det "the"] [N "flight"]] [PP [P "through"] [NP [PN "Houston"]]]]]]
+  Parse #2: [S [VP [VP [V "book"] [NP [Det "the"] [N "flight"]]] [PP [P "through"] [NP [PN "Houston"]]]]]
+
+Utterance #4:
+  Parse #1: [S [VP [V "shoot"] [NP [NP [Det "the"] [N "elephant"]] [PP [P "in"] [NP [Poss "my"] [N "pajamas"]]]]]]
+  Parse #2: [S [VP [VP [V "shoot"] [NP [Det "the"] [N "elephant"]]] [PP [P "in"] [NP [Poss "my"] [N "pajamas"]]]]]
+
+Utterance #5:
+  Parse #1: [S [NP [NP [PN "Houston"]] [PP [P "in"] [NP [Poss "my"] [N "book"]]]] [VP [V "shot"] [NP [NP [Det "an"] [N "elephant"]] [PP [P "in"] [NP [Det "the"] [N "pajamas"]]]]]]
+  Parse #2: [S [NP [NP [PN "Houston"]] [PP [P "in"] [NP [Poss "my"] [N "book"]]]] [VP [VP [V "shot"] [NP [Det "an"] [N "elephant"]]] [PP [P "in"] [NP [Det "the"] [N "pajamas"]]]]]
+  Parse #3: [S [X1 [NP [NP [PN "Houston"]] [PP [P "in"] [NP [Poss "my"] [N "book"]]]] [VP [V "shot"] [NP [Det "an"] [N "elephant"]]]] [PP [P "in"] [NP [Det "the"] [N "pajamas"]]]]
+
+Utterance #6:
+  Parse #1: [S [NP [PN "Houston"]] [VP [V "shot"] [NP [NP [Det "an"] [N "elephant"]] [PP [P "in"] [NP [NP [Poss "my"] [N "pajamas"]] [PP [P "in"] [NP [PN "Houston"]]]]]]]]
+  Parse #2: [S [NP [PN "Houston"]] [VP [V "shot"] [NP [NP [NP [Det "an"] [N "elephant"]] [PP [P "in"] [NP [Poss "my"] [N "pajamas"]]]] [PP [P "in"] [NP [PN "Houston"]]]]]]
+  Parse #3: [S [NP [PN "Houston"]] [VP [VP [V "shot"] [NP [Det "an"] [N "elephant"]]] [PP [P "in"] [NP [NP [Poss "my"] [N "pajamas"]] [PP [P "in"] [NP [PN "Houston"]]]]]]]
+  Parse #4: [S [NP [PN "Houston"]] [VP [VP [V "shot"] [NP [NP [Det "an"] [N "elephant"]] [PP [P "in"] [NP [Poss "my"] [N "pajamas"]]]]] [PP [P "in"] [NP [PN "Houston"]]]]]
+  Parse #5: [S [NP [PN "Houston"]] [VP [VP [VP [V "shot"] [NP [Det "an"] [N "elephant"]]] [PP [P "in"] [NP [Poss "my"] [N "pajamas"]]]] [PP [P "in"] [NP [PN "Houston"]]]]]
+  Parse #6: [S [X1 [NP [PN "Houston"]] [VP [V "shot"] [NP [Det "an"] [N "elephant"]]]] [PP [P "in"] [NP [NP [Poss "my"] [N "pajamas"]] [PP [P "in"] [NP [PN "Houston"]]]]]]
+  Parse #7: [S [X1 [NP [PN "Houston"]] [VP [V "shot"] [NP [NP [Det "an"] [N "elephant"]] [PP [P "in"] [NP [Poss "my"] [N "pajamas"]]]]]] [PP [P "in"] [NP [PN "Houston"]]]]
+  Parse #8: [S [X1 [NP [PN "Houston"]] [VP [VP [V "shot"] [NP [Det "an"] [N "elephant"]]] [PP [P "in"] [NP [Poss "my"] [N "pajamas"]]]]] [PP [P "in"] [NP [PN "Houston"]]]]
+
+
+Script done on Sun 06 Nov 2016 02:57:36 PM NST
