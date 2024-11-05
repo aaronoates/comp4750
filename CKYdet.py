@@ -1,3 +1,11 @@
+#########################################################
+##  CS 4750 (Fall 2024), Assignment #3                 ##
+##   Script File Name: CKYdet.py                       ##
+##       Student Name: Aaron Oates                     ##
+##         Login Name: ajoates                         ##
+##              MUN #: 202105417                       ##
+#########################################################
+
 import sys  # Import the sys module for command-line argument handling.
 
 # Define the Grammar class to store and manage grammar rules.
